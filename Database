@@ -1,0 +1,62 @@
+-- Création de la table Pays
+CREATE TABLE Pays (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nom TEXT NOT NULL
+);
+
+-- Création de la table Categories
+CREATE TABLE Categories (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nom TEXT NOT NULL
+);
+
+-- Création de la table Athletes
+CREATE TABLE Athletes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nom TEXT NOT NULL,
+    prenom TEXT NOT NULL,
+    age INTEGER,
+    sexe CHAR(1),
+    pays_id INTEGER,
+    FOREIGN KEY(pays_id) REFERENCES Pays(id)
+);
+
+-- Création de la table Epreuves
+CREATE TABLE Epreuves (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    categorie_id INTEGER,
+    sexe CHAR(1),
+    medaille_or INTEGER,
+    medaille_argent INTEGER,
+    medaille_bronze INTEGER,
+    nom TEXT,
+    FOREIGN KEY(categorie_id) REFERENCES Categories(id)
+);
+
+-- Création de la table d'association Athletes_Epreuves pour gérer la relation many-to-many
+CREATE TABLE Athletes_Epreuves (
+    athlete_id INTEGER,
+    epreuve_id INTEGER,
+    PRIMARY KEY (athlete_id, epreuve_id),
+    FOREIGN KEY (athlete_id) REFERENCES Athletes(id),
+    FOREIGN KEY (epreuve_id) REFERENCES Epreuves(id)
+);
+
+-- Insertion de données dans la table Categories
+INSERT INTO Categories (nom) VALUES 
+('Athlétisme'), 
+('Natation'), 
+('Gymnastique'), 
+('Judo'), 
+('Cyclisme'), 
+('Aviron'), 
+('Escrime'), 
+('Tir à l''arc'), 
+('Tennis'), 
+('Boxe'), 
+('Haltérophilie'), 
+('Taekwondo'), 
+('Triathlon'), 
+('Voile'), 
+('Water-polo'), 
+('Pentathlon moderne');
