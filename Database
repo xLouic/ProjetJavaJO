@@ -1,9 +1,3 @@
--- Création de la table Pays
-CREATE TABLE Pays (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nom TEXT NOT NULL
-);
-
 -- Création de la table Categories
 CREATE TABLE Categories (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -17,8 +11,10 @@ CREATE TABLE Athletes (
     prenom TEXT NOT NULL,
     age INTEGER,
     sexe CHAR(1),
-    pays_id INTEGER,
-    FOREIGN KEY(pays_id) REFERENCES Pays(id)
+    pays TEXT NOT NULL,
+    medaille_or INTEGER,
+    medaille_argent INTEGER,
+    medaille_bronze INTEGER
 );
 
 -- Création de la table Epreuves
@@ -26,9 +22,6 @@ CREATE TABLE Epreuves (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     categorie_id INTEGER,
     sexe CHAR(1),
-    medaille_or INTEGER,
-    medaille_argent INTEGER,
-    medaille_bronze INTEGER,
     nom TEXT,
     FOREIGN KEY(categorie_id) REFERENCES Categories(id)
 );
